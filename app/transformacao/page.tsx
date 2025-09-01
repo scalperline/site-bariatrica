@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import AIAssistant from '@/components/AIAssistant';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const procedures = [
   {
@@ -219,9 +220,11 @@ export default function TransformacaoPage() {
 
                   <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
                     <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                      <img
+                      <Image
                         src={procedure.image}
                         alt={procedure.name}
+                        width={600}
+                        height={320}
                         className="w-full h-80 object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>

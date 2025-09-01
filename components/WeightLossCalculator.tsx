@@ -1,14 +1,23 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
+
+interface CalculationResults {
+  currentBMI: string;
+  finalBMI: string;
+  expectedLoss: string;
+  finalWeight: string;
+  timeframe: number;
+  healthBenefits: string[];
+}
 
 export default function WeightLossCalculator() {
   const [currentWeight, setCurrentWeight] = useState('');
   const [height, setHeight] = useState('');
   const [age, setAge] = useState('');
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState<CalculationResults | null>(null);
   const [showResults, setShowResults] = useState(false);
 
   const calculateResults = () => {
@@ -157,51 +166,55 @@ export default function WeightLossCalculator() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-2xl p-6">
-                  <h3 className="text-2xl font-bold mb-4">Seus Resultados Personalizados</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center">
-                      <div className="text-3xl font-bold">{results.expectedLoss}kg</div>
-                      <div className="text-sm opacity-90">Perda Esperada</div>
+                {results && (
+                  <>
+                    <div className="bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-2xl p-6">
+                      <h3 className="text-2xl font-bold mb-4">Seus Resultados Personalizados</h3>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="text-center">
+                          <div className="text-3xl font-bold">{results.expectedLoss}kg</div>
+                          <div className="text-sm opacity-90">Perda Esperada</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-3xl font-bold">{results.timeframe}</div>
+                          <div className="text-sm opacity-90">Meses para Meta</div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold">{results.timeframe}</div>
-                      <div className="text-sm opacity-90">Meses para Meta</div>
-                    </div>
-                  </div>
-                </div>
 
-                <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
-                  <h4 className="font-semibold text-gray-900 mb-4">Transformação do IMC</h4>
-                  <div className="flex justify-between items-center">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-red-500">{results.currentBMI}</div>
-                      <div className="text-sm text-gray-600">IMC Atual</div>
+                    <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+                      <h4 className="font-semibold text-gray-900 mb-4">Transformação do IMC</h4>
+                      <div className="flex justify-between items-center">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-red-500">{results.currentBMI}</div>
+                          <div className="text-sm text-gray-600">IMC Atual</div>
+                        </div>
+                        <div className="w-8 h-8 flex items-center justify-center">
+                          <i className="ri-arrow-right-line text-2xl text-blue-600"></i>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-green-500">{results.finalBMI}</div>
+                          <div className="text-sm text-gray-600">IMC Final</div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="w-8 h-8 flex items-center justify-center">
-                      <i className="ri-arrow-right-line text-2xl text-blue-600"></i>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-green-500">{results.finalBMI}</div>
-                      <div className="text-sm text-gray-600">IMC Final</div>
-                    </div>
-                  </div>
-                </div>
 
-                <div className="bg-blue-50 rounded-2xl p-6">
-                  <h4 className="font-semibold text-blue-900 mb-4 flex items-center gap-2">
-                    <i className="ri-heart-pulse-line"></i>
-                    Benefícios para Sua Saúde
-                  </h4>
-                  <ul className="space-y-2">
-                    {results.healthBenefits.map((benefit, index) => (
-                      <li key={index} className="flex items-center gap-2 text-blue-800">
-                        <i className="ri-check-line text-green-500"></i>
-                        {benefit}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                    <div className="bg-blue-50 rounded-2xl p-6">
+                      <h4 className="font-semibold text-blue-900 mb-4 flex items-center gap-2">
+                        <i className="ri-heart-pulse-line"></i>
+                        Benefícios para Sua Saúde
+                      </h4>
+                      <ul className="space-y-2">
+                        {results.healthBenefits.map((benefit, index) => (
+                          <li key={index} className="flex items-center gap-2 text-blue-800">
+                            <i className="ri-check-line text-green-500"></i>
+                            {benefit}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </>
+                )}
 
                 <button className="w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-xl text-lg font-semibold transition-all duration-300 whitespace-nowrap">
                   Quero Começar Minha Jornada

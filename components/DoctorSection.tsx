@@ -2,6 +2,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function DoctorSection() {
   return (
@@ -31,9 +32,11 @@ export default function DoctorSection() {
             viewport={{ once: true }}
           >
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-              <img
+              <Image
                 src="https://readdy.ai/api/search-image?query=Professional%20Brazilian%20bariatric%20surgeon%20Dr.%20Thiago%20Ramos%20in%20medical%20coat%2C%20warm%20smile%2C%20confident%20posture%2C%20modern%20medical%20office%20background%2C%20compassionate%20doctor%2C%20trustworthy%20medical%20professional%2C%20Brazilian%20healthcare%20specialist&width=500&height=600&seq=dr-thiago&orientation=portrait"
                 alt="Dr. Thiago Ramos"
+                width={500}
+                height={600}
                 className="w-full h-[600px] object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent"></div>

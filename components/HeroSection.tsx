@@ -3,18 +3,14 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function HeroSection() {
   const [scrollY, setScrollY] = useState(0);
   const [videoError, setVideoError] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
 
   const handleVideoError = () => {
     setVideoError(true);
-  };
-
-  const handleVideoLoad = () => {
-    setVideoLoaded(true);
   };
 
   useEffect(() => {
@@ -41,7 +37,6 @@ export default function HeroSection() {
               transform: `translateY(${scrollY * 0.5}px)`,
             }}
             onError={handleVideoError}
-            onLoadedData={handleVideoLoad}
           >
             <source src="/fundo-sit.webm" type="video/webm" />
           </video>
@@ -164,10 +159,11 @@ export default function HeroSection() {
             transition={{ duration: 1, delay: 0.4 }}
           >
             <div className="relative w-full h-[600px] rounded-3xl overflow-hidden shadow-2xl">
-              <img
+              <Image
                 src="/dr-fulano.png"
                 alt="Dr. Fulano - Consulta Médica"
-                className="w-full h-full object-cover object-top"
+                fill
+                className="object-cover object-top"
               />
               <div className="absolute bottom-6 left-6 bg-blue-900/80 backdrop-blur-sm text-white px-4 py-2 rounded-full">
                 Dr. Thiago Ramos

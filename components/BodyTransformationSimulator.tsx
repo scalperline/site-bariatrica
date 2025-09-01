@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 export default function BodyTransformationSimulator() {
   const [isSimulating, setIsSimulating] = useState(false);
@@ -89,9 +90,11 @@ export default function BodyTransformationSimulator() {
                           }}
                           transition={{ duration: 1.5 }}
                         >
-                          <img
+                          <Image
                             src={`https://readdy.ai/api/search-image?query=3D%20body%20silhouette%20transformation%20simulation%2C%20weight%20loss%20progression%20visualization%2C%20medical%20illustration%20showing%20$%7Bsteps%5BcurrentStep%5D.weight%7Dkg%20body%20shape%2C%20clean%20white%20background%2C%20professional%20medical%20diagram&width=200&height=300&seq=body-sim-${currentStep}&orientation=portrait`}
                             alt="Simulação Corporal"
+                            width={200}
+                            height={300}
                             className="w-48 h-72 object-contain"
                           />
                         </motion.div>

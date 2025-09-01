@@ -3,6 +3,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import Image from 'next/image';
 
 const timelineData = [
   {
@@ -135,9 +136,11 @@ export default function TransformationTimeline() {
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <img
+                    <Image
                       src={item.image}
                       alt={item.milestone}
+                      width={400}
+                      height={256}
                       className="w-full h-64 object-cover object-top"
                     />
                     <div className={`absolute top-4 right-4 ${COLOR_CLASSES[item.color]?.bg ?? ''} text-white px-4 py-2 rounded-full font-semibold`}>

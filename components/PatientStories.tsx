@@ -3,6 +3,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import Image from 'next/image';
 
 const stories = [
   {
@@ -74,9 +75,11 @@ export default function PatientStories() {
             >
               <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-transparent hover:border-green-200">
                 <div className="text-center">
-                  <img
+                  <Image
                     src={story.after}
                     alt={story.name}
+                    width={80}
+                    height={80}
                     className="w-20 h-20 rounded-full object-cover object-top mx-auto mb-4 border-4 border-green-200"
                   />
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{story.name}</h3>
@@ -98,14 +101,19 @@ export default function PatientStories() {
           <div className="grid lg:grid-cols-2 gap-0">
             <div className="relative">
               <div className="relative h-96 lg:h-full overflow-hidden">
-                <motion.img
-                  src={showBefore ? stories[activeStory].before : stories[activeStory].after}
-                  alt={`${stories[activeStory].name} - ${showBefore ? 'Antes' : 'Depois'}`}
-                  className="w-full h-full object-cover object-top"
+                <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
-                />
+                >
+                  <Image
+                    src={showBefore ? stories[activeStory].before : stories[activeStory].after}
+                    alt={`${stories[activeStory].name} - ${showBefore ? 'Antes' : 'Depois'}`}
+                    width={600}
+                    height={400}
+                    className="w-full h-full object-cover object-top"
+                  />
+                </motion.div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 <div className="absolute bottom-4 left-4 right-4">
                   <div className="flex items-center justify-between mb-4">
